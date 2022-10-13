@@ -15,12 +15,20 @@ class Handler implements URLHandler {
             if (url.getPath().contains("/add")) {
                 String[] parameters = url.getQuery().split("=");
                 if (parameters[0].equals("s")){
-                    str += parameters[1];
+                    str += parameters[1] + " ";
                     return "String is added by: " + str + " It's now " + str;
                 }
             }
             else if (url.getPath().contains("/search")){
-                
+                String[] answer = str.split(" ");
+                String[] parameters = url.getQuery().split("=");
+                String output = "";
+                for(int i = 0; i < answer.length; i ++){
+                    if(answer[i].contains(parameters[1])){
+                        output += answer[i] + " ";
+                    }
+                }
+                return output;
             }
             return "404 Not Found!";
         }
